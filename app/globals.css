@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* Little Learners design tokens (natural Montessori-inspired palette). */
+@theme {
+  --color-cream: #faf7f0;
+  --color-sage: #dde7d5;
+  --color-sage-dark: #405641;
+  --color-terracotta: #d58c70;
+  /* Darker terracotta for text and borders on light surfaces (AA contrast). */
+  --color-terracotta-dark: #9c4f33;
+  --color-beige: #e9ddc9;
+  --color-sky: #dceaf3;
+  --color-yellow: #f3e6b5;
+  --color-ink: #343a34;
+  --color-muted: #5f655b;
+  --color-surface: #ffffff;
+
+  --font-sans: var(--font-nunito), ui-rounded, system-ui, sans-serif;
+
+  --radius-card: 1.75rem;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@utility card {
+  @apply rounded-[var(--radius-card)] bg-surface shadow-[0_1px_0_rgba(64,86,65,0.08),0_6px_20px_-12px_rgba(64,86,65,0.35)];
+}
+
+@utility btn {
+  @apply inline-flex min-h-12 min-w-12 cursor-pointer items-center justify-center gap-2 rounded-full px-6 text-lg font-bold transition-[transform,background-color,box-shadow] duration-150 select-none active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-50;
+}
+@utility btn-primary {
+  @apply btn bg-sage-dark text-cream hover:bg-[#344734];
+}
+@utility btn-secondary {
+  @apply btn border-2 border-sage-dark/25 bg-surface text-sage-dark hover:bg-sage/50;
+}
+@utility btn-quiet {
+  @apply btn px-4 text-base text-sage-dark hover:bg-sage/60;
+}
+@utility btn-danger {
+  @apply btn bg-terracotta-dark text-surface hover:bg-[#843f27];
+}
+
+@layer base {
+  /* Visible keyboard focus everywhere. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 4px solid var(--color-terracotta-dark);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@utility animate-pop {
+  animation: pop-in 260ms ease-out both;
+}
+@utility animate-fade-up {
+  animation: fade-up 220ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* .motion-exempt: slow linear progress fills that carry meaning. */
+  *:not(.motion-exempt),
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
