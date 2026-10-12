@@ -9,7 +9,7 @@ export const modules: Record<LearningModule, ModuleInfo> = {
     id: "reading",
     title: "Membaca",
     subtitle: "Reading Garden",
-    description: "Kenali huruf, huruf awal, suku kata, dan kata sederhana.",
+    description: "Kenali huruf, vokal, suku kata, lalu baca dan eja kata sederhana.",
     accentClass: "bg-sage",
     symbol: "Aa",
   },

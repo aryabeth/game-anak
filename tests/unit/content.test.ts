@@ -9,6 +9,10 @@ describe("learning content", () => {
     expect(validateAllActivities(activities)).toEqual([]);
   });
 
+  it("gives every activity more than five steps", () => {
+    for (const a of activities) expect(a.rounds.length, a.id).toBeGreaterThan(5);
+  });
+
   it("has at least one activity per module", () => {
     for (const m of LEARNING_MODULES) expect(getModuleActivities(m).length).toBeGreaterThan(0);
   });

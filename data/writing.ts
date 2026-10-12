@@ -53,6 +53,8 @@ const UPPER = {
   A: [line(100, 40, 50, 160), line(100, 40, 150, 160), line(72, 110, 128, 110)],
   O: [arc(100, 100, 48, 60, -90, -450)],
   U: [join(line(60, 40, 60, 120), arc(100, 120, 40, 40, 180, 0), line(140, 120, 140, 40))],
+  E: [line(65, 40, 65, 160), line(65, 40, 140, 40), line(65, 100, 125, 100), line(65, 160, 140, 160)],
+  H: [line(60, 40, 60, 160), line(140, 40, 140, 160), line(60, 100, 140, 100)],
 };
 
 const LOWER = {
@@ -60,6 +62,10 @@ const LOWER = {
   o: [arc(100, 125, 35, 35, -90, -450)],
   c: [arc(100, 125, 35, 35, -45, -315)],
   a: [arc(95, 125, 30, 35, -60, -420), line(125, 90, 125, 160)],
+  i: [line(100, 95, 100, 160), line(100, 62, 100, 72)],
+  v: [join(line(65, 90, 100, 160), line(100, 160, 135, 90))],
+  u: [join(line(70, 90, 70, 125), arc(100, 125, 30, 35, 180, 0), line(130, 125, 130, 90)), line(130, 90, 130, 160)],
+  n: [line(70, 90, 70, 160), join(arc(100, 125, 30, 35, 180, 360), line(130, 125, 130, 160))],
 };
 
 export const writingActivities: Activity[] = [
@@ -68,14 +74,15 @@ export const writingActivities: Activity[] = [
     module: "writing",
     kind: "tracing",
     title: "Garis Dasar",
-    summary: "Telusuri garis tegak, datar, miring, lengkung, lingkaran, dan zigzag.",
-    completionText: "Kamu sudah berlatih enam garis dasar!",
+    summary: "Telusuri garis tegak, datar, miring, lengkung, lingkaran, zigzag, dan gelombang.",
+    completionText: "Kamu sudah berlatih delapan garis dasar!",
     offlineTip: "Gambar garis yang sama di pasir, tepung, atau kertas dengan krayon.",
     difficulty: 1,
     rounds: [
       stroke("line-vertical", "Garis tegak", "Tarik garis dari atas ke bawah.", [line(100, 30, 100, 170)]),
       stroke("line-horizontal", "Garis datar", "Tarik garis dari kiri ke kanan.", [line(30, 100, 170, 100)]),
       stroke("line-diagonal", "Garis miring", "Tarik garis miring ke bawah.", [line(40, 40, 160, 160)]),
+      stroke("line-diagonal-up", "Garis miring naik", "Tarik garis miring ke atas.", [line(40, 160, 160, 40)]),
       stroke("line-curve", "Garis lengkung", "Buat lengkungan seperti pelangi.", [arc(100, 140, 70, 70, 180, 360)]),
       stroke("line-circle", "Lingkaran", "Buat lingkaran. Mulai dari atas.", [arc(100, 100, 60, 60, -90, -450)]),
       stroke(
@@ -84,6 +91,12 @@ export const writingActivities: Activity[] = [
         "Buat garis zigzag naik turun.",
         [polyline([30, 70], [65, 130], [100, 70], [135, 130], [170, 70])],
       ),
+      stroke(
+        "line-wave",
+        "Garis gelombang",
+        "Buat gelombang seperti ombak.",
+        [join(arc(65, 100, 35, 30, 180, 360), arc(135, 100, 35, 30, 180, 0))],
+      ),
     ],
   },
   {
@@ -91,8 +104,8 @@ export const writingActivities: Activity[] = [
     module: "writing",
     kind: "tracing",
     title: "Huruf Besar",
-    summary: "Telusuri huruf besar I, L, T, A, dan O.",
-    completionText: "Kamu sudah berlatih menulis huruf I, L, T, A, dan O!",
+    summary: "Telusuri huruf besar I, L, T, A, O, U, E, dan H.",
+    completionText: "Kamu sudah berlatih menulis huruf I, L, T, A, O, U, E, dan H!",
     offlineTip: "Bentuk huruf dari tanah liat atau tali, lalu raba bentuknya dengan jari.",
     difficulty: 2,
     rounds: [
@@ -101,6 +114,9 @@ export const writingActivities: Activity[] = [
       letter("T", UPPER.T),
       letter("A", UPPER.A),
       letter("O", UPPER.O),
+      letter("U", UPPER.U),
+      letter("E", UPPER.E),
+      letter("H", UPPER.H),
     ],
   },
   {
@@ -108,8 +124,8 @@ export const writingActivities: Activity[] = [
     module: "writing",
     kind: "tracing",
     title: "Huruf Kecil",
-    summary: "Telusuri huruf kecil l, o, c, dan a.",
-    completionText: "Kamu sudah berlatih menulis huruf l, o, c, dan a!",
+    summary: "Telusuri huruf kecil l, o, c, a, i, v, u, dan n.",
+    completionText: "Kamu sudah berlatih menulis huruf l, o, c, a, i, v, u, dan n!",
     offlineTip: "Tulis huruf kecil di udara dengan jari, besar-besar, bersama orang tua.",
     difficulty: 2,
     rounds: [
@@ -117,6 +133,10 @@ export const writingActivities: Activity[] = [
       letter("o", LOWER.o, { size: "kecil" }),
       letter("c", LOWER.c, { size: "kecil" }),
       letter("a", LOWER.a, { size: "kecil" }),
+      letter("i", LOWER.i, { size: "kecil" }),
+      letter("v", LOWER.v, { size: "kecil" }),
+      letter("u", LOWER.u, { size: "kecil" }),
+      letter("n", LOWER.n, { size: "kecil" }),
     ],
   },
   {
@@ -124,14 +144,19 @@ export const writingActivities: Activity[] = [
     module: "writing",
     kind: "tracing",
     title: "Salin Kata",
-    summary: "Salin kata ITU dengan menelusuri hurufnya satu per satu.",
-    completionText: "Kamu sudah berlatih menyalin kata ITU!",
+    summary: "Salin kata ITU dan LIHAT dengan menelusuri hurufnya satu per satu.",
+    completionText: "Kamu sudah berlatih menyalin kata ITU dan LIHAT!",
     offlineTip: "Salin kata ITU di kertas dengan pensil tebal sambil melihat contoh.",
     difficulty: 3,
     rounds: [
       letter("I", UPPER.I, { model: "ITU" }),
       letter("T", UPPER.T, { model: "ITU" }),
       letter("U", UPPER.U, { model: "ITU" }),
+      letter("L", UPPER.L, { model: "LIHAT" }),
+      letter("I", UPPER.I, { model: "LIHAT" }),
+      letter("H", UPPER.H, { model: "LIHAT" }),
+      letter("A", UPPER.A, { model: "LIHAT" }),
+      letter("T", UPPER.T, { model: "LIHAT" }),
     ],
   },
 ];

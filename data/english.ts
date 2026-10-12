@@ -35,10 +35,11 @@ function pictureChoice(key: VocabId): ChoiceOption {
   return { id: key, visual: v.visual, label: v.word };
 }
 
-function listenAndFind(target: VocabId, choices: VocabId[]): ChoiceRound {
+/** `again` marks a review round for a word that was already practised. */
+function listenAndFind(target: VocabId, choices: VocabId[], again = false): ChoiceRound {
   const v = vocabulary[target];
   return {
-    id: `listen-${target}`,
+    id: `listen-${target}${again ? "-again" : ""}`,
     instruction: `Find the ${v.word}.`,
     support: "Dengarkan, lalu pilih gambarnya.",
     speak: [en(`${cap(v.word)}. Find the ${v.word}.`)],
@@ -50,10 +51,10 @@ function listenAndFind(target: VocabId, choices: VocabId[]): ChoiceRound {
   };
 }
 
-function matchWord(target: VocabId, choices: VocabId[]): ChoiceRound {
+function matchWord(target: VocabId, choices: VocabId[], again = false): ChoiceRound {
   const v = vocabulary[target];
   return {
-    id: `word-${target}`,
+    id: `word-${target}${again ? "-again" : ""}`,
     instruction: `Match the word: ${v.word}`,
     support: "Pilih gambar yang cocok dengan kata.",
     speak: [en(cap(v.word))],
@@ -66,10 +67,10 @@ function matchWord(target: VocabId, choices: VocabId[]): ChoiceRound {
   };
 }
 
-function findColor(target: VocabId, choices: VocabId[]): ChoiceRound {
+function findColor(target: VocabId, choices: VocabId[], again = false): ChoiceRound {
   const v = vocabulary[target];
   return {
-    id: `color-${target}`,
+    id: `color-${target}${again ? "-again" : ""}`,
     instruction: `Find ${v.word}.`,
     support: "Dengarkan, lalu pilih warnanya.",
     speak: [en(`${cap(v.word)}. Find ${v.word}.`)],
@@ -115,6 +116,10 @@ export const englishActivities: Activity[] = [
       listenAndFind("dog", ["dog", "fish", "cat"]),
       listenAndFind("bird", ["fish", "cat", "bird"]),
       listenAndFind("fish", ["bird", "fish", "dog"]),
+      listenAndFind("bird", ["bird", "dog", "fish"], true),
+      listenAndFind("cat", ["fish", "bird", "cat"], true),
+      listenAndFind("dog", ["cat", "dog", "bird"], true),
+      listenAndFind("fish", ["fish", "cat", "dog"], true),
     ],
   },
   {
@@ -131,6 +136,10 @@ export const englishActivities: Activity[] = [
       findColor("blue", ["blue", "yellow", "red"]),
       findColor("yellow", ["green", "red", "yellow"]),
       findColor("green", ["yellow", "green", "blue"]),
+      findColor("yellow", ["yellow", "blue", "green"], true),
+      findColor("red", ["green", "yellow", "red"], true),
+      findColor("blue", ["red", "blue", "yellow"], true),
+      findColor("green", ["green", "red", "yellow"], true),
     ],
   },
   {
@@ -150,6 +159,7 @@ export const englishActivities: Activity[] = [
       matchWord("apple", ["bread", "apple", "cup"]),
       matchWord("banana", ["banana", "apple", "bread"]),
       matchWord("bread", ["ball", "bread", "banana"]),
+      matchWord("book", ["ball", "bag", "book"], true),
     ],
   },
   {
@@ -166,6 +176,10 @@ export const englishActivities: Activity[] = [
       phrase("It is red.", "red", ["red", "green", "yellow"]),
       phrase("I see a ball.", "ball", ["book", "ball", "bag"]),
       phrase("This is a banana.", "banana", ["apple", "bread", "banana"]),
+      phrase("This is a dog.", "dog", ["dog", "cat", "fish"]),
+      phrase("It is blue.", "blue", ["yellow", "blue", "red"]),
+      phrase("I see a fish.", "fish", ["bird", "dog", "fish"]),
+      phrase("This is a book.", "book", ["book", "cup", "ball"]),
     ],
   },
 ];

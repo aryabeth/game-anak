@@ -198,3 +198,27 @@ for (const path of ["/", "/home", "/learn/reading", "/activity/numbers-count", "
     await page.screenshot({ path: `test-results/screens/${info.project.name}${path.replaceAll("/", "_") || "_root"}.png`, fullPage: true });
   });
 }
+
+for (const id of ["reading-vowels", "reading-missing-letter", "reading-read-word", "reading-spell-word"]) {
+  test(`reading activity ${id} can be played to the end`, async ({ page }) => {
+    const activity = getActivity(id)!;
+    await page.goto(`/activity/${id}`);
+    await page.getByRole("button", { name: "Mulai" }).click();
+    for (const [i, round] of activity.rounds.entries()) {
+      if (activity.kind === "choice") {
+        const r = round as (typeof activity.rounds)[number];
+        const answer = r.choices.find((c) => c.id === r.answerId)!;
+        await page.getByRole("button", { name: answer.label, exact: true }).click();
+      } else if (activity.kind === "sequence") {
+        const r = round as (typeof activity.rounds)[number];
+        for (const tileId of r.answerOrder) {
+          const tile = r.tiles.find((t) => t.id === tileId)!;
+          await page.getByRole("list", { name: "Pilihan" }).getByRole("button", { name: tile.label, exact: true }).click();
+        }
+      }
+      await expect(page.getByText(round.successText)).toBeVisible();
+      await page.getByRole("button", { name: i === activity.rounds.length - 1 ? "Selesai ✓" : "Lanjut →" }).click();
+    }
+    await expect(page.getByRole("heading", { name: activity.completionText })).toBeVisible();
+  });
+}

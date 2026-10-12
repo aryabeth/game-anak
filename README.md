@@ -6,13 +6,13 @@ A calm, Montessori-inspired learning web app for children aged 4–6. The interf
 
 | Area | Activities |
 | --- | --- |
-| **Membaca** (Reading Garden) | Letter recognition with upper/lowercase pairs · initial letter of a pictured word · first syllable · building words from syllables (BOLA, BUKU, MATA, SAPI, TOPI) |
-| **Menulis** (Writing Studio) | Tracing six pre-writing strokes · uppercase I L T A O · lowercase l o c a · copying the word ITU |
+| **Membaca** (Reading Garden) | Letter recognition with upper/lowercase pairs · vowels A I U E O · initial letter of a pictured word · missing letter (B _ L A) · first syllable · reading a word and finding its picture · building words from syllables · spelling words letter by letter (TAS, ROTI, IKAN, SAPI, TOPI, BOLA, APEL) |
+| **Menulis** (Writing Studio) | Tracing eight pre-writing strokes · uppercase I L T A O U E H · lowercase l o c a i v u n · copying the words ITU and LIHAT |
 | **Mengenal Angka** (Number Garden) | Counting objects one by one (1–10) · numeral recognition · matching quantity to numeral · ordering 1–10 |
-| **Bahasa Inggris** (English Corner) | Listen & find (animals) · colors · word-to-picture (things & food) · simple phrases. 15 words in total |
+| **Bahasa Inggris** (English Corner) | Listen & find (animals) · colors · word-to-picture (things & food) · simple phrases. 15 words in total; later rounds review words already met |
 | **Pojok Orang Tua** | Two-step parent gate · nickname · voice and sound-effect toggles · progress overview · reset with confirmation · privacy notice |
 
-The app also has a welcome screen, a home dashboard with a "Lanjutkan belajar" (resume) card, module pages that suggest an activity without locking the others, a completion screen with a star and an off-screen activity idea, and local progress that survives a page reload.
+Every activity has more than five steps (eight in most; a unit test enforces the minimum). The app also has a welcome screen, a home dashboard with a "Lanjutkan belajar" (resume) card, module pages that suggest an activity without locking the others, a completion screen with a star and an off-screen activity idea, and local progress that survives a page reload.
 
 ## Running it
 
